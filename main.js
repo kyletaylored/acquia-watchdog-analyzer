@@ -40,6 +40,7 @@
         })
         .DataTable({
           data: data,
+          iDisplayLength: 50,
           columns: [
             {
               className: "details-control",
@@ -59,18 +60,24 @@
               render: function(data, type, row) {
                 var ts = new Date(data * 1000);
                 return ts.toLocaleString();
-              }
+              },
+              width: "25%"
             },
-            { title: "Module", data: "module" },
-            { title: "Request IP", data: "reip" },
-            { title: "Page", data: "page" },
+            { title: "Module", data: "module", width: "20%" },
+            { title: "Request IP", data: "reip", width: "20%" },
+            { title: "Page", data: "page", width: "35%" },
             {
               title: "(blank)",
               data: "blank",
               visible: false,
               searchable: false
             },
-            { title: "User ID", data: "uid" },
+            {
+              title: "User ID",
+              data: "uid",
+              visible: false,
+              searchable: false
+            },
             {
               title: "Relevant Link",
               data: "relink",
@@ -79,7 +86,8 @@
             },
             {
               title: "Error message",
-              data: "msg"
+              data: "msg",
+              visible: false
             }
           ]
         });
