@@ -1,0 +1,13 @@
+{
+    "name": "kyletaylor/acquia-watchdog-analyzer",
+    "authors": [
+        {
+            "name": "Kyle Taylor",
+            "email": "kyletaylored@gmail.com"
+        }
+    ],
+    "require": {
+        "gossi/php-code-profiles": "dev-master",
+        "gossi/php-code-formatter": "dev-master"
+    }
+}
