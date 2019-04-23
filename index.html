@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-<head>
+    <title>Drupal Watchdog</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+  </head>
 
-  <title>Drupal Watchdog</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Drupal Watchdog</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item active">
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Drupal Watchdog</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -41,117 +63,65 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
           </li> -->
-        </ul>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-
-  <div class="modal js-loading-bar">
-   <div class="modal-dialog">
-     <div class="modal-content">
-       <div class="modal-body">
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="modal js-loading-bar">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <div class="spinner-border text-warning" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <div>
+              <h5>Loading table...</h5>
+            </div>
           </div>
-       </div>
-     </div>
-   </div>
-  </div>
-
-  <!-- Page Content -->
-  <div class="container section">
-    <div class="row">
-      <div class="col-lg-12" style="margin-top: 50px;">
-        <style type="text/css" media="screen">
-          table.dataTable tbody th, table.dataTable tbody td {
-            white-space: nowrap;
-          }
-        </style>
-        <table class="table log table-sm">
-        </table>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Bootstrap core JavaScript -->
-  <script
-  src="https://code.jquery.com/jquery-3.4.0.js"
-  crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
-
-  <script>
-    $.get("./watchdog.json", function(data){
-      $('table.log').DataTable({
-        data: data,
-        columns: [
-          { title: "Datetime / Server" },
-          {
-            title: "Timestamp",
-            render: function ( data, type, row ) {
-              var ts = new Date(data*1000);
-              return ts.toLocaleString();
+    <!-- Page Content -->
+    <div class="container section">
+      <div class="row">
+        <div class="col-lg-12" style="margin-top: 50px;">
+          <style type="text/css" media="screen">
+            table.dataTable tbody th,
+            table.dataTable tbody td {
+              white-space: nowrap;
             }
-          },
-          { title: "Module" },
-          { title: "Request IP" },
-          { title: "Page" },
-          { title: "(blank)" },
-          { title: "User ID" },
-          { title: "Relevant Link" },
-          { title: "Error message" }
-        ],
-        columnDefs: [
-          {
-            "targets": [ 0, 5, 7 ],
-            "visible": false,
-            "searchable": false
-          }
-        ]
-      });
+            td.details-control {
+              cursor: pointer;
+            }
+            td pre {
+              max-width: 800px;
+              white-space: normal;
+              background-color: #333;
+              color: white;
+              padding: 10px;
+            }
+          </style>
+          <table class="table log table-sm"></table>
+        </div>
+      </div>
+    </div>
 
-    // $(".modal").modal('show');
-    // jQuery.get("./watchdog.json", function(data){
-    //   console.log(data);
-    //   var table = $("table.log tbody");
-    //   var pbar = $(".progress-bar");
-    //   data.forEach((d, i) => {
-    //     var row = $("<tr></tr>");
-    //     d.forEach((el, ind) => {
-    //       switch (ind) {
-    //         case 0:
-    //         case 5:
-    //         case 7:
-    //           return; //skip
-    //           break;
-    //         case 1:
-    //           var ts = new Date(el*1000);
-    //           el = ts.toLocaleString()
-    //           break;
-    //         case 8:
-    //           // el = "<pre>" + el + "</pre>";
-    //           el = $("<pre></pre>").text(el);
-    //           break;
-    //       }
-    //       // Add column to row.
-    //       var col = $("<td></td>").html(el).appendTo(row);
-    //     });
-    //     table.append(row);
-    //     if (i % 5 == 0) {
-    //       setTimeout(function(){
-    //         var percentage = parseFloat((i+1)/data.length*100, 2).toFixed(2);
-    //         pbar.attr("aria-valuenow", percentage).css("width", percentage + "%");
-    //       }, 500);
-    //     }
-    //   });
-    // }).done(err => {
-    //   $(".modal").modal('hide');
-    // });
-  });
-
-  </script>
-
-</body>
-
+    <!-- Bootstrap core JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="./main.js" type="text/javascript"></script>
+  </body>
 </html>
